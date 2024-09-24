@@ -1,0 +1,123 @@
+﻿<Window x:Class="Importation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+         xmlns:UCGeneraFi="clr-namespace:UCGeneraFi;assembly=UCGeneraFi" 
+        xmlns:local="clr-namespace:Importation"
+        mc:Ignorable="d" Width="1000">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="IsEnabled" Value="True"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=SelectedItem, ElementName=CmbcolumnHeader}" Value="{x:Null}">
+                    <Setter Property="UIElement.IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+
+           
+            <UCGeneraFi:ucTxtBox Name="txtfile"  Height="25" Grid.Column="1" Width="300" Margin="0,0,10,0" HorizontalAlignment="Right" FontSize="11" />
+            <Button Style="{StaticResource styleGris}" x:Name="Openfile" Content="Parcourir" Grid.Column="2" Height="30" HorizontalAlignment="Left" VerticalAlignment="Center" Click="Openfile_Click"/>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+           
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="41*"/>
+                <ColumnDefinition Width="149*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label  Grid.Row="0"  Style="{StaticResource RegularLabel}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Margin="120.832,12,285,6">Date amortissement anterieure</Label>
+            <DatePicker Name="DateAmo" Grid.Row="1"   VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" Margin="141.832,8,306,8"/>
+
+        </Grid>
+        <DataGrid Visibility="Collapsed" Grid.Row="3" Name="dgImporter"  Margin="10,10,0,0" RowHeaderWidth="0"  CanUserResizeRows="False" IsReadOnly="True" ColumnHeaderHeight="40" FontFamily="Century Gothic" CanUserReorderColumns="False"  
+                    			VerticalGridLinesBrush="#FFEEECEC" HorizontalGridLinesBrush="#FFBBBBBB" 
+                    			AlternatingRowBackground="#fafcfc" BorderBrush="WhiteSmoke" Background="White" VerticalAlignment="Top" MaxHeight="400" HorizontalAlignment="Center">
+
+            <DataGrid.Resources>
+
+                <Style TargetType="{x:Type DataGridColumnHeader}">
+
+                    <Setter Property="Background" Value="{DynamicResource ComboBoxNormalBackgroundBrush}"></Setter>
+                    <Setter Property="BorderBrush" Value="WhiteSmoke"></Setter>
+                    <Setter Property="BorderThickness" Value="1"></Setter>
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <local:ImportationHeader  ></local:ImportationHeader>
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+
+
+            </DataGrid.Resources>
+
+        </DataGrid>
+    
+            
+        
+     
+        
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="190"/>
+                <ColumnDefinition Width="230"/>
+                <ColumnDefinition Width="115"/>
+                <ColumnDefinition Width="115"/>
+                <ColumnDefinition Width="115"/>
+                <ColumnDefinition Width="115"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource styleGris}" x:Name="Importation_Fournisseur" Content="Importation Fournisseur"   Click="Importation_Fournissuer_Click"/>
+            <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource styleGris}" x:Name="Importation_centreAnalytique"  Content="Importation centreAnalytique"    Click="Importation_centreAnalytique_Click"/>
+            <!--<Button Grid.Column="2"  Grid.Row="0" Style="{StaticResource styleGris}" x:Name="locNiveau1"  Content="loc Niveau 1"    Click="LocNiveau1_Click"/>-->
+            <Button Grid.Column="2"  Grid.Row="0" Style="{StaticResource styleGris}" x:Name="Localisation"  Content="Localisation"    Click="LocNiveau1_Click"/>
+            <!--<Button Grid.Column="3" Grid.Row="0" Style="{StaticResource styleGris}" x:Name="locNiveau2"  Content="loc Niveau 2"     HorizontalAlignment="Left"  Click="LocNiveau1_Click"/>
+            <Button Grid.Column="4"  Grid.Row="0" Style="{StaticResource styleGris}" x:Name="locNiveau3"  Content="loc Niveau 3"      Click="LocNiveau1_Click"/>-->
+            <Button Grid.Column="3"  Grid.Row="0" Style="{StaticResource styleGris}" x:Name="categorie"  Content="Categorie"     Click="LocNiveau1_Click"/>
+            <Button Grid.Column="0"  Grid.Row="1" Style="{StaticResource styleGris}" x:Name="PlanComptable"  Content="PlanComptable"     Click="LocNiveau1_Click"/>
+            <Button Grid.Column="1"  Grid.Row="1" Style="{StaticResource styleGris}" x:Name="PlanComptableEse"  Content="PlanComptableEse"     Click="LocNiveau1_Click"/>
+        </Grid>
+   
+
+
+        <Button Grid.Row="4" 
+                    x:Name="btnImport" Style="{StaticResource styleGris}" VerticalAlignment="Center" Content="importer"  HorizontalAlignment="Center" Height="40"  Click="BtnImport_Click">
+        </Button>
+        
+    </Grid>
+</Window>
